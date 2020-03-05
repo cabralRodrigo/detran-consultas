@@ -24,12 +24,12 @@ jobs:
       run: dotnet build src --configuration Release
 
     - name: dotnet publish
-      run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp
+      run: dotnet publish src -c Release -o ${{env.DOTNET_ROOT}}/publish
 
     - name: Deploy to Azure Web App
       uses: azure/webapps-deploy@v1
       with:
         app-name: 'detran-consulta'
         slot-name: 'production'
-        publish-profile: ${{ secrets.AzureAppService_PublishProfile_fef3f0a91b7c4517a09e4406ff229e6f }}
-        package: ${{env.DOTNET_ROOT}}/myapp 
+        publish-profile: ${{secrets.AzureAppService_PublishProfile_fef3f0a91b7c4517a09e4406ff229e6f}}
+        package: ${{env.DOTNET_ROOT}}/publish
