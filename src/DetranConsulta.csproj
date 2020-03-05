@@ -19,7 +19,11 @@
   <!-- Excluí os arquivos não minificados na pasta de bundles ao fazer uma publicação -->
   <ItemGroup>
     <Bundles Include="wwwroot\bundle\*" Exclude="wwwroot\bundle\*.min.*" />
-    <Content Update="@(Bundles)" CopyToPublishDirectory="Never" />
+
+    <!-- Workaround pelo bug https://github.com/xoofx/NUglify/pull/85. Deverá ser removido quando o bug for resolvido. -->
+    <Bundles2 Include="@(Bundles)" Exclude="wwwroot\bundle\app.css" />
+
+    <Content Update="@(Bundles2)" CopyToPublishDirectory="Never" />
   </ItemGroup>
 
   <!-- Excluí os arquivos não necessários ao fazer uma publicação -->

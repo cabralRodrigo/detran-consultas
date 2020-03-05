@@ -21,7 +21,11 @@
     </environment>
 
     <environment exclude="Development">
-        <link href="~/bundle/app.min.css" rel="stylesheet" asp-append-version="true" />
+        @* 
+            <!-- Workaround pelo bug https://github.com/xoofx/NUglify/pull/85. Deverá ser removido quando o bug for resolvido. -->
+        *@
+        <link href="~/bundle/app.css" rel="stylesheet" asp-append-version="true" />
+        @*<link href="~/bundle/app.min.css" rel="stylesheet" asp-append-version="true" />*@
     </environment>
 </head>
 <body>
