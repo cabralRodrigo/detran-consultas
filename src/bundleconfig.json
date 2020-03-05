@@ -4,6 +4,7 @@
     "inputFiles": [
       "wwwroot/lib/bootstrap/bootstrap.css",
       "wwwroot/lib/font-awesome/all.css",
+      "wwwroot/lib/datatables/dataTables.bootstrap4.css",
       "wwwroot/css/**/!(*.min).css"
     ],
     "minify": {
