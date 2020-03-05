@@ -3,50 +3,53 @@
   "defaultProvider": "cdnjs",
   "libraries": [
     {
-      "library": "twitter-bootstrap@4.4.1",
-      "destination": "wwwroot/lib/bootstrap/",
-      "files": [
-        "js/bootstrap.js",
-        "css/bootstrap.css"
-      ]
-    },
-    {
-      "library": "datatables@1.10.19",
-      "destination": "wwwroot/lib/datatables/",
-      "files": [
-        "js/jquery.dataTables.js",
-        "js/dataTables.bootstrap4.js",
-        "css/dataTables.bootstrap4.css"
-      ]
-    },
-    {
-      "library": "jquery@3.4.1",
+      "provider": "filesystem",
+      "library": "node_modules\\jquery\\dist\\",
       "destination": "wwwroot/lib/jquery/",
-      "files": [
-        "jquery.js"
-      ]
+      "files": [ "jquery.js" ]
     },
     {
-      "library": "font-awesome@5.12.1",
+      "provider": "filesystem",
+      "library": "node_modules/bootstrap/dist/js",
+      "destination": "wwwroot/lib/bootstrap/",
+      "files": [ "bootstrap.js" ]
+    },
+    {
+      "provider": "filesystem",
+      "library": "node_modules/bootstrap/dist/css",
+      "destination": "wwwroot/lib/bootstrap/",
+      "files": [ "bootstrap.css" ]
+    },
+    {
+      "provider": "filesystem",
+      "library": "node_modules/datatables.net/js/",
+      "destination": "wwwroot/lib/datatables/",
+      "files": [ "jquery.dataTables.js" ]
+    },
+    {
+      "provider": "filesystem",
+      "library": "node_modules/datatables.net-bs4/js/",
+      "destination": "wwwroot/lib/datatables/",
+      "files": [ "dataTables.bootstrap4.js" ]
+    },
+    {
+      "provider": "filesystem",
+      "library": "node_modules/datatables.net-bs4/css/",
+      "destination": "wwwroot/lib/datatables/",
+      "files": [ "dataTables.bootstrap4.css" ]
+    },
+    {
+      "provider": "filesystem",
+      "library": "node_modules/@fortawesome/fontawesome-free/css",
       "destination": "wwwroot/lib/font-awesome/",
       "files": [
-        "css/all.css",
-        "webfonts/fa-brands-400.eot",
-        "webfonts/fa-brands-400.svg",
-        "webfonts/fa-brands-400.ttf",
-        "webfonts/fa-brands-400.woff",
-        "webfonts/fa-brands-400.woff2",
-        "webfonts/fa-regular-400.eot",
-        "webfonts/fa-regular-400.svg",
-        "webfonts/fa-regular-400.ttf",
-        "webfonts/fa-regular-400.woff",
-        "webfonts/fa-regular-400.woff2",
-        "webfonts/fa-solid-900.eot",
-        "webfonts/fa-solid-900.svg",
-        "webfonts/fa-solid-900.ttf",
-        "webfonts/fa-solid-900.woff",
-        "webfonts/fa-solid-900.woff2"
+        "all.css"
       ]
+    },
+    {
+      "provider": "filesystem",
+      "library": "node_modules/@fortawesome/fontawesome-free/webfonts/",
+      "destination": "wwwroot/webfonts/"
     }
   ]
 }

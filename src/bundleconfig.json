@@ -1,0 +1,31 @@
+[
+  {
+    "outputFileName": "wwwroot/bundle/app.css",
+    "inputFiles": [
+      "wwwroot/lib/bootstrap/bootstrap.css",
+      "wwwroot/lib/font-awesome/all.css",
+      "wwwroot/css/**/!(*.min).css"
+    ],
+    "minify": {
+      "enabled": true,
+      "adjustRelativePaths": false
+    }
+  },
+  {
+    "outputFileName": "wwwroot/bundle/app.js",
+    "inputFiles": [
+      "wwwroot/lib/jquery/jquery.js",
+      "wwwroot/lib/bootstrap/bootstrap.js",
+      "wwwroot/lib/datatables/jquery.dataTables.js",
+      "wwwroot/lib/datatables/dataTables.bootstrap4.js",
+      "wwwroot/js/**/!(*.min).js"
+    ],
+    "minify": {
+      "enabled": true,
+      "alwaysEscapeNonAscii": true,
+      "preserveImportantComments": false,
+      "renameLocals": true,
+      "termSemicolons": true
+    }
+  }
+]

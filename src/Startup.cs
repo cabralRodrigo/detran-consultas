@@ -1,8 +1,12 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System;
+using System.Globalization;
+using System.Linq;
 
 namespace DetranConsulta
 {
@@ -17,18 +21,34 @@ namespace DetranConsulta
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews().AddRazorRuntimeCompilation();
+            var mvcBuilder = services.AddControllersWithViews();
+#if DEBUG
+            mvcBuilder.AddRazorRuntimeCompilation();
+#endif
             services.AddHttpClient<IDetranApi, DetranApi>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
+            {
                 app.UseDeveloperExceptionPage();
+                app.UseStaticFiles();
+            }
             else
+            {
                 app.UseExceptionHandler("/Home/Error");
 
-            app.UseStaticFiles();
+                app.UseStaticFiles(new StaticFileOptions
+                {
+                    OnPrepareResponse = ctx =>
+                    {
+                        ctx.Context.Response.Headers.Append("Cache-Control", "public,max-age=2592000");
+                        ctx.Context.Response.Headers.Append("Expires", DateTime.UtcNow.AddDays(30).ToString("R", CultureInfo.InvariantCulture));
+                    }
+                });
+            }
+
             app.UseRouting();
             app.UseAuthorization();
 

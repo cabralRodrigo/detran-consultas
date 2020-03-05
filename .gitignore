@@ -351,3 +351,6 @@ MigrationBackup/
 
 # Libman packages
 src/wwwroot/lib
+src/wwwroot/webfonts
+src/wwwroot/bundle
+src/.config

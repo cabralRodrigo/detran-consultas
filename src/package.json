@@ -1,0 +1,23 @@
+{
+  "name": "detran-consultas",
+  "version": "1.0.0",
+  "description": "detran-consultas",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cabralRodrigo/detran-consultas.git"
+  },
+  "author": "Rodrigo Cabral",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/cabralRodrigo/detran-consultas/issues"
+  },
+  "homepage": "https://github.com/cabralRodrigo/detran-consultas#readme",
+  "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.12.1",
+    "bootstrap": "^4.4.1",
+    "datatables.net": "^1.10.20",
+    "datatables.net-bs4": "^1.10.20",
+    "jquery": "^3.4.1"
+  }
+}
