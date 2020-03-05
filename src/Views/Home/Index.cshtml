@@ -1,0 +1,16 @@
+﻿@{ 
+    ViewData["Title"] = "Consulta";
+
+    if (!(this.Context.Request.Cookies.TryGetValue("renach", out var renach)))
+    {
+        renach = string.Empty;
+    }
+}
+
+<div class="text-center">
+    @using (Html.BeginForm("Aulas", "Home", FormMethod.Get))
+    {
+        @Html.TextBox("renach", renach, new { })
+        <button type="submit">Consulta</button>
+    }
+</div>
