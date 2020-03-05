@@ -7,6 +7,7 @@ using Microsoft.Extensions.Hosting;
 using System;
 using System.Globalization;
 using System.Linq;
+using WebMarkupMin.AspNetCore3;
 
 namespace DetranConsulta
 {
@@ -21,6 +22,12 @@ namespace DetranConsulta
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddWebMarkupMin(options =>
+            {
+                options.AllowCompressionInDevelopmentEnvironment = true;
+                options.AllowMinificationInDevelopmentEnvironment = true;
+            }).AddHtmlMinification().AddXmlMinification().AddHttpCompression();
+
             var mvcBuilder = services.AddControllersWithViews();
 #if DEBUG
             mvcBuilder.AddRazorRuntimeCompilation();
@@ -34,6 +41,8 @@ namespace DetranConsulta
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+
+            app.UseWebMarkupMin();
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -62,6 +71,8 @@ namespace DetranConsulta
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
+
+            
         }
     }
 }
