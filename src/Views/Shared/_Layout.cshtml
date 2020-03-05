@@ -16,11 +16,11 @@
     <link rel="icon" type="image/png" href="~/favicon.ico">
     <link rel="manifest" href="~/manifest.json">
 
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link href="~/lib/bootstrap/css/bootstrap.css" rel="stylesheet" />
+    <link href="~/lib/datatables/css/dataTables.bootstrap4.css" rel="stylesheet" />
+    <link href="~/lib/font-awesome/css/all.css" rel="stylesheet" />
+    
     <link rel="stylesheet" href="~/css/site.css" />
-    <link href="~/lib/datatables/datatables.css" rel="stylesheet" />
-    <link href="~/lib/datatables/datatables.bootstrap.css" rel="stylesheet" />
-    <link href="~/lib/font-awesome/font-awesome.css" rel="stylesheet" />
 </head>
 <body>
     <header>
@@ -47,11 +47,13 @@
         </main>
     </div>
 
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/lib/jquery/jquery.js"></script>
+    <script src="~/lib/bootstrap/js/bootstrap.js"></script>
+    <script src="~/lib/datatables/js/jquery.dataTables.js"></script>
+    <script src="~/lib/datatables/js/dataTables.bootstrap4.js"></script>
+   
     <script src="~/js/site.js" asp-append-version="true"></script>
-    <script src="~/lib/datatables/datatables.js"></script>
-    <script src="~/lib/datatables/datatables.boostrap.js"></script>
+
     @RenderSection("Scripts", required: false)
 </body>
 </html>
