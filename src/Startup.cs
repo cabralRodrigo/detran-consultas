@@ -25,7 +25,11 @@ namespace DetranConsulta
 #if DEBUG
             mvcBuilder.AddRazorRuntimeCompilation();
 #endif
+
+            services.AddHttpContextAccessor();
+
             services.AddHttpClient<IDetranApi, DetranApi>();
+            services.AddScoped<IRenachStorage, RenachStorage>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

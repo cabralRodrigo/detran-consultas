@@ -36,7 +36,7 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Aulas Teóricas</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="AulasTeoricas" asp-action="Index">Aulas Teóricas</a>
                         </li>
                     </ul>
                 </div>
@@ -44,9 +44,7 @@
         </nav>
     </header>
     <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
+        @RenderBody()
     </div>
 
     <environment include="Development">
