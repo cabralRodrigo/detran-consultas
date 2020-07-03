@@ -1,0 +1,65 @@
+﻿@model ValueTuple<List<AulaPratica>, long, long>
+
+@{
+    ViewData["Title"] = "Aulas Práticas";
+    var (aulas, tempoTotal, tempoDetran) = Model;
+    //var quantidadeTotalAulas = 0;
+}
+
+@*@foreach (Disciplina disciplina in Enum.GetValues(typeof(Disciplina)))
+{
+    var quantidadeAulaDisciplina = disciplina.QuantidadeAulas();
+    quantidadeTotalAulas += quantidadeAulaDisciplina;
+
+    <vc:aula-progress-bar valor="@aulas.Count(s => s.Disciplina == disciplina)" total="quantidadeAulaDisciplina" label="@disciplina.Name()"></vc:aula-progress-bar>
+}
+
+<vc:aula-progress-bar valor="@aulas.Count" total="quantidadeTotalAulas" label="Total de Aulas"></vc:aula-progress-bar>
+
+<hr />*@
+
+<table class="table table-striped table-sm" id="aulas">
+    <thead>
+        <tr>
+            <th></th>
+            <th>Data</th>
+            <th>Início</th>
+            <th>Fim</th>
+            <th>Disciplina</th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+        @foreach (var aula in aulas.OrderBy(s => s.Data).ThenBy(s => s.Inicio))
+        {
+            <tr>
+                <td style="text-align: center; cursor: pointer;">
+                    <i class="fas fa-plus"></i>
+                    <div class="detalhes" style="display: none;">
+                        <div style="padding: 10px; padding-top: 0;">
+                            <div>
+                                Data de envio: @aula.DataEnvio.ToString("dd/MM/yyyy HH:mm:ss")
+                            </div>
+                            <div>
+                                Tempo de aula: @((aula.Fim - aula.Inicio).ToString("hh\\:mm\\:ss"))
+                            </div>
+                            <div>
+                                Tempo de processamento: @((aula.DataEnvio - aula.Data.Add(aula.Fim)).ToString("hh\\:mm\\:ss"))
+                            </div>
+                        </div>
+                    </div>
+                </td>
+                <td data-sort="@aula.Data.Date.Ticks">@aula.Data.ToString("dd/MM/yyyy")</td>
+                <td data-sort="@aula.Inicio.Ticks">@aula.Inicio.ToString("hh\\:mm\\:ss")</td>
+                <td data-sort="@aula.Fim.Ticks">@aula.Fim</td>
+                <td>@aula.Disciplina</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<hr />
+Tempo processamento: @(tempoTotal - tempoDetran) ms
+<br />
+Tempo detran: @tempoDetran ms

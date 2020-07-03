@@ -1,0 +1,32 @@
+﻿@inject IRenachStorage renachStorage
+
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">
+            Aulas Práticas
+        </h5>
+
+        <p class="card-text">
+            Consulte suas aulas práticas já registradas no sistema do detran.
+        </p>
+
+        @using (Html.BeginForm("Consultar", "AulasPraticas", FormMethod.Get))
+        {
+            <div class="input-group flex-nowrap">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="addon-wrapping">
+                        Renach
+                    </span>
+                </div>
+
+                @Html.TextBox("renach", renachStorage.BuscarRenach(), new { placeholder = "Renach", @class = "form-control" })
+                <div class="input-group-append">
+                    <button class="btn btn-primary" type="submit">
+                        <i class="fas fa-search"></i>
+                        Consultar
+                    </button>
+                </div>
+            </div>
+        }
+    </div>
+</div>

@@ -13,6 +13,7 @@ namespace DetranConsulta
     public interface IDetranApi
     {
         Task<(List<Aula> Aulas, long TempoTotal, long TempoDetran)> ListarAulas(string renach);
+        Task<(List<AulaPratica> Aulas, long TempoTotal, long TempoDetran)> ListarAulasPraticas(string renach);
     }
 
     public class DetranApi : IDetranApi
@@ -64,6 +65,61 @@ namespace DetranConsulta
                 var disciplina = DetranDis(sdisciplina);
 
                 aulas.Add(new Aula
+                {
+                    Data = new DateTime(data.Year, data.Month, data.Day, 0, 0, 0),
+                    DataEnvio = envio,
+                    Inicio = inicio,
+                    Fim = fim,
+                    Disciplina = disciplina,
+                    Status = sstatus
+                });
+            }
+
+            tempoTotal.Stop();
+
+            return (aulas, tempoTotal.ElapsedMilliseconds, tempoDetran.ElapsedMilliseconds);
+        }
+
+        public async Task<(List<AulaPratica> Aulas, long TempoTotal, long TempoDetran)> ListarAulasPraticas(string renach)
+        {
+            var tempoTotal = Stopwatch.StartNew();
+            var request = new HttpRequestMessage(HttpMethod.Post, "http://www2.detran.rj.gov.br/portal/habilitacao/biometriaValid")
+            {
+                Content = new FormUrlEncodedContent(new Dictionary<string, string>
+                {
+                    ["renach"] = renach,
+                    ["disciplina"] = "TEORICAS",
+                    ["tipo"] = "pratica"
+                })
+            };
+
+            var tempoDetran = Stopwatch.StartNew();
+            var html = await (await this.http.SendAsync(request)).Content.ReadAsStringAsync();
+            tempoDetran.Stop();
+
+            var document = new HtmlDocument();
+            document.LoadHtml(html);
+
+            var aulas = new List<AulaPratica>();
+
+            foreach (var linha in document.QuerySelectorAll("tr").Skip(1))
+            {
+                var dados = linha.ChildNodes.Where(s => s.Name == "td").Select(s => s.InnerText).ToArray();
+
+                var sdata = dados[0];
+                var sinicio = dados[1];
+                var sfim = dados[2];
+                var sdisciplina = dados[3];
+                var senvio = dados[4];
+                var sstatus = dados[5];
+
+                var data = DetranDate(sdata);
+                var inicio = DetranTime(sinicio, false);
+                var fim = DetranTime(sfim, false);
+                var envio = DetranDate(senvio);
+                var disciplina = sdisciplina;
+
+                aulas.Add(new AulaPratica
                 {
                     Data = new DateTime(data.Year, data.Month, data.Day, 0, 0, 0),
                     DataEnvio = envio,
@@ -137,6 +193,16 @@ namespace DetranConsulta
         [DisplayFormat(DataFormatString = "{0:HH:mm}")]
         public TimeSpan Fim { get; set; }
         public Disciplina Disciplina { get; set; }
+        public string Status { get; set; }
+    }
+
+    public class AulaPratica
+    {
+        public DateTime Data { get; set; }
+        public DateTime DataEnvio { get; set; }
+        public TimeSpan Inicio { get; set; }
+        public TimeSpan Fim { get; set; }
+        public string Disciplina { get; set; }
         public string Status { get; set; }
     }
 
