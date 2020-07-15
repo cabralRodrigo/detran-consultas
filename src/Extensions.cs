@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DetranConsulta.Detran;
+using System;
 using System.ComponentModel;
 using System.Linq;
 using System.Reflection;

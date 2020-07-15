@@ -1,21 +1,13 @@
 ﻿using HtmlAgilityPack;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
 using System.Diagnostics;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 
-namespace DetranConsulta
+namespace DetranConsulta.Detran
 {
-    public interface IDetranApi
-    {
-        Task<(List<Aula> Aulas, long TempoTotal, long TempoDetran)> ListarAulas(string renach);
-        Task<(List<AulaPratica> Aulas, long TempoTotal, long TempoDetran)> ListarAulasPraticas(string renach);
-    }
-
     public class DetranApi : IDetranApi
     {
         private readonly HttpClient http;
@@ -177,66 +169,5 @@ namespace DetranConsulta
                 _ => throw new Exception()
             };
         }
-    }
-
-    public class Aula
-    {
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
-        public DateTime Data { get; set; }
-
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy HH:mm:ss}")]
-        public DateTime DataEnvio { get; set; }
-
-        [DisplayFormat(DataFormatString = "{0:HH:mm}")]
-        public TimeSpan Inicio { get; set; }
-
-        [DisplayFormat(DataFormatString = "{0:HH:mm}")]
-        public TimeSpan Fim { get; set; }
-        public Disciplina Disciplina { get; set; }
-        public string Status { get; set; }
-    }
-
-    public class AulaPratica
-    {
-        public DateTime Data { get; set; }
-        public DateTime DataEnvio { get; set; }
-        public TimeSpan Inicio { get; set; }
-        public TimeSpan Fim { get; set; }
-        public string Disciplina { get; set; }
-        public string Status { get; set; }
-    }
-
-    public enum Disciplina
-    {
-        [Description("Direção Defensiva")]
-        [QuantidadeAulas(16)]
-        DirecaoDefensiva,
-
-        [Description("Primeiros Socorros")]
-        [QuantidadeAulas(4)]
-        PrimeirosSocorros,
-
-        [Description("Legislação de trânsito")]
-        [QuantidadeAulas(18)]
-        Legislacao,
-
-        [Description("Mecânica")]
-        [QuantidadeAulas(3)]
-        Mecanica,
-
-        [Description("Meio Ambiente")]
-        [QuantidadeAulas(4)]
-        MeioAmbiente
-    }
-
-    public class QuantidadeAulasAttribute : Attribute
-    {
-        public int Quantidade { get; }
-
-        public QuantidadeAulasAttribute(int quantidade)
-        {
-            this.Quantidade = quantidade;
-        }
-
     }
 }

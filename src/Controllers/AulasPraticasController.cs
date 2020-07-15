@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using DetranConsulta.Detran;
+using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
 namespace DetranConsulta.Controllers
