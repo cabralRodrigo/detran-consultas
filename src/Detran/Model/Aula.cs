@@ -1,9 +1,9 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace DetranConsulta.Detran
+namespace DetranConsulta.Detran.Model
 {
-    public class Aula
+    public abstract class Aula
     {
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime Data { get; set; }
@@ -16,7 +16,7 @@ namespace DetranConsulta.Detran
 
         [DisplayFormat(DataFormatString = "{0:HH:mm}")]
         public TimeSpan Fim { get; set; }
-        public Disciplina Disciplina { get; set; }
+
         public string Status { get; set; }
     }
 }

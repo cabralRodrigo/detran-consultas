@@ -10,12 +10,12 @@ namespace DetranConsulta
     {
         public static string Name<T>(this T source) where T : Enum
         {
-            return typeof(T).GetMember(source.ToString()).Single().GetCustomAttribute<DescriptionAttribute>().Description;
+            return typeof(T).GetMember(source.ToString()).Single().GetCustomAttribute<DescriptionAttribute>()?.Description ?? source.ToString();
         }
 
-        public static int QuantidadeAulas<T>(this T source) where T : Enum
+        public static int? QuantidadeAulas<T>(this T source) where T : Enum
         {
-            return typeof(T).GetMember(source.ToString()).Single().GetCustomAttribute<QuantidadeAulasAttribute>().Quantidade;
+            return typeof(T).GetMember(source.ToString()).Single().GetCustomAttribute<QuantidadeAulasAttribute>()?.Quantidade;
         }
     }
 }

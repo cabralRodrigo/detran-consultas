@@ -1,20 +1,23 @@
-﻿@model ValueTuple<List<Aula>, long, long>
+﻿@model RespostaDetran<List<AulaTeorica>>
 
 @{
     ViewData["Title"] = "Aulas Teóricas";
-    var (aulas, tempoTotal, tempoDetran) = Model;
     var quantidadeTotalAulas = 0;
 }
 
-@foreach (Disciplina disciplina in Enum.GetValues(typeof(Disciplina)))
+@foreach (DisciplinaTeorica disciplina in Enum.GetValues(typeof(DisciplinaTeorica)))
 {
     var quantidadeAulaDisciplina = disciplina.QuantidadeAulas();
-    quantidadeTotalAulas += quantidadeAulaDisciplina;
 
-    <vc:aula-progress-bar valor="@aulas.Count(s => s.Disciplina == disciplina)" total="quantidadeAulaDisciplina" label="@disciplina.Name()"></vc:aula-progress-bar>
+    if (quantidadeAulaDisciplina.HasValue)
+    {
+        quantidadeTotalAulas += quantidadeAulaDisciplina.Value;
+
+        <vc:aula-progress-bar valor="@Model.Valor.Count(s => s.Disciplina == disciplina)" total="quantidadeAulaDisciplina.Value" label="@disciplina.Name()"></vc:aula-progress-bar>
+    }
 }
 
-<vc:aula-progress-bar valor="@aulas.Count" total="quantidadeTotalAulas" label="Total de Aulas"></vc:aula-progress-bar>
+<vc:aula-progress-bar valor="@Model.Valor.Count" total="quantidadeTotalAulas" label="Total de Aulas"></vc:aula-progress-bar>
 
 <hr />
 
@@ -31,7 +34,7 @@
 
     <tbody>
 
-        @foreach (var aula in aulas.OrderBy(s => s.Data).ThenBy(s => s.Inicio))
+        @foreach (var aula in Model.Valor.OrderBy(s => s.Data).ThenBy(s => s.Inicio))
         {
             <tr>
                 <td style="text-align: center; cursor: pointer;">
@@ -60,6 +63,6 @@
 </table>
 
 <hr />
-Tempo processamento: @(tempoTotal - tempoDetran) ms
+Tempo processamento: @(Model.TempoTotal - Model.TempoDetran) ms
 <br />
-Tempo detran: @tempoDetran ms
+Tempo detran: @Model.TempoDetran ms

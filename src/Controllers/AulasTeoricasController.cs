@@ -19,10 +19,10 @@ namespace DetranConsulta.Controllers
 
         public async Task<IActionResult> Consultar(string renach)
         {
-            var (aulas, tempoTotal, tempoDetran) = await this.detranApi.ListarAulas(renach);
+            var aulas = await this.detranApi.ListarAulasTeoricas(renach);
             this.renachStorage.DefinirRenach(renach);
 
-            return this.View((aulas, tempoTotal, tempoDetran));
+            return this.View(aulas);
         }
     }
 }
