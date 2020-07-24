@@ -9,6 +9,7 @@ namespace DetranConsulta.Detran.Parser
             aula.Disciplina = dados[3] switch
             {
                 "PRATICO DE DIRECAO VEICULAR - AUTO" => DisciplinaPratica.Carro,
+                "PRATICO DE DIRECAO VEICULAR - MOTO" => DisciplinaPratica.Moto,
                 _ => DisciplinaPratica.Desconhecida
             };
         }
