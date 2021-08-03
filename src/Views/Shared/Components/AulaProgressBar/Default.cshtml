@@ -1,7 +1,8 @@
 ﻿@model DetranConsulta.Components.AulaProgressBarViewComponent.Model
 
-<div class="progress" style="height: 30px; margin-bottom: 10px;">
-    <div class="progress-bar @Model.Estilo" role="progressbar" style="text-align: left; padding-left: 10px; width: @Model.Porcentagem%; font-weight: bold;">
-        @Model.Disciplina - @Model.QuantidadeAulasFeitas de @Model.QuantidadeAulasTotal
-    </div>
+<p class="mb-0">
+    @Model.Disciplina - @Model.QuantidadeAulasFeitas de @Model.QuantidadeAulasTotal
+</p>
+<div class="progress" style="height: 15px; margin-bottom: 10px;">
+    <div class="progress-bar @Model.Estilo" role="progressbar" style="text-align: left; padding-left: 10px; width: @Model.Porcentagem%; font-weight: bold;"> </div>
 </div>
