@@ -31,7 +31,7 @@ namespace DetranConsulta.Detran
         {
             var tempoTotal = Stopwatch.StartNew();
 
-            var request = new HttpRequestMessage(HttpMethod.Post, "http://www2.detran.rj.gov.br/portal/habilitacao/biometriaValid")
+            var request = new HttpRequestMessage(HttpMethod.Post, "https://www2.detran.rj.gov.br/portal/habilitacao/biometriaValid")
             {
                 Content = new FormUrlEncodedContent(new Dictionary<string, string>
                 {
@@ -40,6 +40,8 @@ namespace DetranConsulta.Detran
                     ["tipo"] = tipo
                 })
             };
+
+            request.Headers.Add("X-Requested-With", "XMLHttpRequest");
 
             var tempoDetran = Stopwatch.StartNew();
             var response = await this.http.SendAsync(request);
